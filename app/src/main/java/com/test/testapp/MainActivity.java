@@ -19,7 +19,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class MainActivity extends AppCompatActivity {
 
     public static final String CHANNEL_ID = "CHANNEL_ID";
-    private FloatingActionButton fab_minus;
+    public static final String KEY_EXTRA = "currentNumber";
+    private FloatingActionButton fabMinus;
     private ViewPager viewPager;
     private MyPageAdapter pagerAdapter;
     private int currentNumber = 0;
@@ -30,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fab_minus = findViewById(R.id.activity_main_btn_minus);
-        FloatingActionButton fab_plus = findViewById(R.id.activity_main_btn_plus);
+        fabMinus = findViewById(R.id.activity_main_btn_minus);
+        FloatingActionButton fabPlus = findViewById(R.id.activity_main_btn_plus);
         AppCompatButton btn_notification = findViewById(R.id.activity_main_btn_create_notify);
 
         viewPager = findViewById(R.id.main_activity_vp);
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         fabMinusCheck();
 
-        fab_plus.setOnClickListener(new View.OnClickListener() {
+        fabPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 currentNumber++;
@@ -51,14 +52,15 @@ public class MainActivity extends AppCompatActivity {
                 viewPager.setCurrentItem(currentNumber);
             }
         });
-        fab_minus.setOnClickListener(new View.OnClickListener() {
+        fabMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 notificationManager.cancel(currentNumber);
                 currentNumber--;
-                viewPager.setCurrentItem(currentNumber);
-                pagerAdapter.removeFragment();
                 fabMinusCheck();
+                pagerAdapter.removeFragment();
+                viewPager.setCurrentItem(currentNumber);
+
             }
         });
         btn_notification.setOnClickListener(new View.OnClickListener() {
@@ -72,9 +74,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void fabMinusCheck() {
         if (currentNumber < 2) {
-            fab_minus.setVisibility(View.INVISIBLE);
+            fabMinus.setVisibility(View.INVISIBLE);
         } else
-            fab_minus.setVisibility(View.VISIBLE);
+            fabMinus.setVisibility(View.VISIBLE);
     }
 
     private void createNotificationChannel() {
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void sendNotification() {
         Intent activityIntent = new Intent(this, MainActivity.class);
-        activityIntent.putExtra("currentNumber", currentNumber);
+        activityIntent.putExtra(KEY_EXTRA, currentNumber);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 1, activityIntent, 0);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
