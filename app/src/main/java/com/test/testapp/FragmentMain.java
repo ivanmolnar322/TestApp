@@ -27,9 +27,7 @@ public class FragmentMain extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        if (getArguments() != null) {
-            numFragment = getArguments().getInt(KEY_NUMBER);
-        }
+        numFragment = getArguments().getInt(KEY_NUMBER);
         AppCompatTextView tvNumFragment = view.findViewById(R.id.fragment_main_tv_num_fragment);
         tvNumFragment.setText(String.valueOf(numFragment));
         return view;

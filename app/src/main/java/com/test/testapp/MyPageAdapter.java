@@ -10,7 +10,7 @@ import java.util.List;
 
 public class MyPageAdapter extends FragmentStatePagerAdapter {
 
-    private final List<Fragment> myFragments = new ArrayList<>();
+    private  List<Fragment> myFragments = new ArrayList<>();
 
     public MyPageAdapter(FragmentManager fm) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
