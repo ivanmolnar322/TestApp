@@ -1,4 +1,4 @@
-package com.test.testapp;
+package com.test.testapp.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
+
+import com.test.testapp.R;
 
 public class FragmentMain extends Fragment {
 
@@ -27,7 +29,9 @@ public class FragmentMain extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        numFragment = getArguments().getInt(KEY_NUMBER);
+        if (getArguments() != null) {
+            numFragment = getArguments().getInt(KEY_NUMBER,0);
+        }
         AppCompatTextView tvNumFragment = view.findViewById(R.id.fragment_main_tv_num_fragment);
         tvNumFragment.setText(String.valueOf(numFragment));
         return view;

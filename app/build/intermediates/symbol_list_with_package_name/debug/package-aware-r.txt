@@ -1539,6 +1539,7 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable circle_blue
 drawable design_bottom_navigation_item_background
 drawable design_fab_background
 drawable design_ic_visibility
@@ -1786,7 +1787,7 @@ id linear
 id listMode
 id list_item
 id main_activity_constraint
-id main_activity_vp
+id main_activity_view_pager
 id masked
 id message
 id middle
