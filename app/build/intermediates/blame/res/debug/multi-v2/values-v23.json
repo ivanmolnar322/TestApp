@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\hhxiv\\AndroidStudioProjects\\TestApp3\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v23\\values-v23.xml",
+            "outputFile": "C:\\Users\\hhxiv\\AndroidStudioProjects\\TestAppmy\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v23\\values-v23.xml",
             "map": [
                 {
                     "source": "C:\\Users\\hhxiv\\.gradle\\caches\\transforms-2\\files-2.1\\ffb6a67829fa40d4c0493cb7e147e8f7\\cardview-1.0.0\\res\\values-v23\\values-v23.xml",

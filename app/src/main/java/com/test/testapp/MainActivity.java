@@ -6,7 +6,6 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,13 +18,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
     public static final String CHANNEL_ID = "CHANNEL_ID";
-    private FloatingActionButton fab_minus, fab_plus;
-    private AppCompatButton btn_notification;
+    private FloatingActionButton fab_minus;
     private ViewPager viewPager;
     private MyPageAdapter pagerAdapter;
-    private int currentNumber = 1;
+    private int currentNumber = 0;
     private NotificationManagerCompat notificationManager;
 
     @Override
@@ -34,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         fab_minus = findViewById(R.id.activity_main_btn_minus);
-        fab_plus = findViewById(R.id.activity_main_btn_plus);
-        btn_notification = findViewById(R.id.activity_main_btn_create_notify);
+        FloatingActionButton fab_plus = findViewById(R.id.activity_main_btn_plus);
+        AppCompatButton btn_notification = findViewById(R.id.activity_main_btn_create_notify);
 
         viewPager = findViewById(R.id.main_activity_vp);
         pagerAdapter = new MyPageAdapter(getSupportFragmentManager());
@@ -49,11 +46,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 currentNumber++;
-                Log.d(TAG, "onClick: " + currentNumber);
                 fabMinusCheck();
                 pagerAdapter.addFragment(FragmentMain.newInstance(currentNumber));
                 viewPager.setCurrentItem(currentNumber);
-
             }
         });
         fab_minus.setOnClickListener(new View.OnClickListener() {
@@ -61,25 +56,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 notificationManager.cancel(currentNumber);
                 currentNumber--;
-                fabMinusCheck();
-                pagerAdapter.removeFragment();
                 viewPager.setCurrentItem(currentNumber);
-
+                pagerAdapter.removeFragment();
+                fabMinusCheck();
             }
         });
         btn_notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 createNotificationChannel();
                 sendNotification();
-
             }
         });
-        int notificationNum = getIntent().getIntExtra("currentNumber", 0);
-
-        pagerAdapter.getItem(notificationNum);
-
     }
 
     private void fabMinusCheck() {
@@ -109,8 +97,8 @@ public class MainActivity extends AppCompatActivity {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_launcher_background)
-                .setContentTitle("title")
-                .setContentText("fragment " + currentNumber)
+                .setContentTitle(getString(R.string.notification_title))
+                .setContentText(getString(R.string.notification_title) + currentNumber)
                 .setContentIntent(contentIntent)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);

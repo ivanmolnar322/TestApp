@@ -15,7 +15,6 @@
             android:fontFamily="sans-serif-condensed"
             android:gravity="center"
             android:maxLines="1"
-            android:text="0"
             android:textColor="@color/blue"
             android:textSize="28sp"
             android:textStyle="bold"

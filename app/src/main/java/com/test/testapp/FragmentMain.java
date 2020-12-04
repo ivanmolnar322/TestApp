@@ -12,13 +12,12 @@ import androidx.fragment.app.Fragment;
 
 public class FragmentMain extends Fragment {
 
-    AppCompatTextView tvNumFragment;
-    int numFragment = 0;
+    public static String KEY_NUMBER = "numFragment";
 
     static FragmentMain newInstance(int numFragment) {
         FragmentMain pageFragment = new FragmentMain();
         Bundle arguments = new Bundle();
-        arguments.putInt("numFragment", numFragment);
+        arguments.putInt(KEY_NUMBER, numFragment);
         pageFragment.setArguments(arguments);
         return pageFragment;
     }
@@ -33,8 +32,9 @@ public class FragmentMain extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        numFragment = getArguments().getInt("numFragment");
-        tvNumFragment = view.findViewById(R.id.fragment_main_tv_num_fragment);
+        assert getArguments() != null;
+        int numFragment = getArguments().getInt(KEY_NUMBER);
+        AppCompatTextView tvNumFragment = view.findViewById(R.id.fragment_main_tv_num_fragment);
         tvNumFragment.setText(String.valueOf(numFragment));
         return view;
 
