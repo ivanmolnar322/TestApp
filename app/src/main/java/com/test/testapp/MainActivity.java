@@ -10,17 +10,16 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.viewpager.widget.ViewPager;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String CHANNEL_ID = "CHANNEL_ID";
     public static final String KEY_EXTRA = "currentNumber";
-    private FloatingActionButton fabMinus;
+    private AppCompatImageButton btnMinus;
     private ViewPager viewPager;
     private MyPageAdapter pagerAdapter;
     private int currentNumber = 0;
@@ -31,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fabMinus = findViewById(R.id.activity_main_btn_minus);
-        FloatingActionButton fabPlus = findViewById(R.id.activity_main_btn_plus);
+        btnMinus = findViewById(R.id.activity_main_btn_minus);
+        AppCompatImageButton btnPlus = findViewById(R.id.activity_main_btn_plus);
         AppCompatButton btn_notification = findViewById(R.id.activity_main_btn_create_notify);
 
         viewPager = findViewById(R.id.main_activity_vp);
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         fabMinusCheck();
 
-        fabPlus.setOnClickListener(new View.OnClickListener() {
+        btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 currentNumber++;
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 viewPager.setCurrentItem(currentNumber);
             }
         });
-        fabMinus.setOnClickListener(new View.OnClickListener() {
+        btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 notificationManager.cancel(currentNumber);
@@ -74,9 +73,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void fabMinusCheck() {
         if (currentNumber < 2) {
-            fabMinus.setVisibility(View.INVISIBLE);
-        } else
-            fabMinus.setVisibility(View.VISIBLE);
+            btnMinus.setVisibility(View.INVISIBLE);
+        } else {
+            btnMinus.setVisibility(View.VISIBLE);
+        }
     }
 
     private void createNotificationChannel() {
